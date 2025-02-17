@@ -16,11 +16,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t thesaurus5689/email-backend:latest --platform linux/amd64,linux/arm64 ./api/
-          docker build -t thesaurus5689/email-frontend:latest --platform linux/amd64,linux/arm64 ./front-end-nextjs/
+          docker build -t thesaurus5689/email-backend:latest --platform linux/amd64,linux/arm64 ./email-writer-sb/
+          docker build -t thesaurus5689/email-frontend:latest --platform linux/amd64,linux/arm64 ./email-writer-react/
 
       - name: Push Docker image
         run: |
           docker login -u thesaurus5689 -p ${{ secrets.DOCKER_HUB_TOKEN }}
-          docker push thesaurus5689/devops-qrcode-api:latest
-          docker push thesaurus5689/devops-qrcode-frontend:latest
+          docker push thesaurus5689/email-backend:latest
+          docker push thesaurus5689/email-frontend:latest
