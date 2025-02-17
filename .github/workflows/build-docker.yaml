@@ -1,0 +1,26 @@
+name: Build and Publish image to Docker Hub
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "email-writer-sb/Dockerfile"
+      - "email-writer-react/Dockerfile"
+
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t thesaurus5689/email-backend:latest --platform linux/amd64,linux/arm64 ./api/
+          docker build -t thesaurus5689/email-frontend:latest --platform linux/amd64,linux/arm64 ./front-end-nextjs/
+
+      - name: Push Docker image
+        run: |
+          docker login -u thesaurus5689 -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push thesaurus5689/devops-qrcode-api:latest
+          docker push thesaurus5689/devops-qrcode-frontend:latest
