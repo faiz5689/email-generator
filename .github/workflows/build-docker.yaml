@@ -6,6 +6,7 @@ on:
     paths:
       - "email-writer-sb/Dockerfile"
       - "email-writer-react/Dockerfile"
+    workflow_dispatch: # This enables manual triggering
 
 jobs:
   publish_images:
